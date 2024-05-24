@@ -1,0 +1,17 @@
+---
+- name: Copy system_purpose.yml to servers
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Ensure /etc/ansible/facts.d directory exists
+      ansible.builtin.file:
+        path: /etc/ansible/facts.d
+        state: directory
+        mode: '0755'
+
+    - name: Copy system_purpose.fact to /etc/ansible/facts.d
+      ansible.builtin.copy:
+        src: host_vars/{{ inventory_hostname }}.fact
+        dest: /etc/ansible/facts.d/system_purpose.fact
+        mode: '0644'
