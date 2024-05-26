@@ -1,0 +1,3 @@
+[my_packages]
+my_rpms = ansible, git, ansible-lint, molecule, ansible-sign
+my_pips = ansible-creator, pytest-ansible, tox-ansible

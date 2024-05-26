@@ -1,0 +1,1 @@
+ansible all -i inventory -m shell -a 'rm -f /etc/ansible/facts.d/custom_facts.fact' --become

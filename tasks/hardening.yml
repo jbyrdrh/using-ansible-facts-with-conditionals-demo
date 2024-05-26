@@ -1,0 +1,37 @@
+- name: Ensure Firewalld is installed
+  ansible.builtin.yum:
+    name: firewalld
+    state: present
+
+- name: Ensure firewalld is running
+  ansible.builtin.service:
+    name: firewalld
+    state: started
+    enabled: yes
+
+- name: Allow incoming traffic only on select few ports
+  ansible.posix.firewalld:
+    port: "{{ item }}"
+    permanent: yes
+    state: enabled
+    immediate: yes
+  loop:
+    - 80/tcp
+    - 443/tcp
+    - 22/tcp
+
+- name: Remove all other allowed ports
+  ansible.posix.firewalld:
+    port: "{{ item }}"
+    state: disabled
+    permanent: yes
+    immediate: yes
+  loop:
+    - 21/tcp
+    - 23/tcp
+    - 25/tcp
+    - 53/tcp
+    - 123/tcp
+    - 3306/tcp
+    - 5432/tcp
+    # Add other ports that you want to disable here

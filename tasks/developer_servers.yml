@@ -1,0 +1,47 @@
+---
+- name: Task specific to developer_servers
+  ansible.builtin.debug:
+    msg: "Executing tasks for developer_servers group"
+
+- name: Set the new variable rpms_to_install from ansible_local fact
+  ansible.builtin.set_fact:
+    rpms_to_install: "{{ ansible_local.custom_facts.my_packages.my_rpms }}"
+    pip_modules: "{{ ansible_local.custom_facts.my_packages.my_pips }}"
+
+- name: Enable Red Hat repositories
+  community.general.rhsm_repository:
+    name:
+     - ansible-automation-platform-2.4-for-rhel-9-x86_64-rpms
+    state: enabled
+
+- name: Print the rpms_to_install and pip_modules variables
+  ansible.builtin.debug:
+    msg: "The {{ item.key }} variable is {{ item.value }}"
+  loop: 
+    - { key: "pip_modules", value: "{{ pip_modules }}" }
+    - { key: "rpms_to_install", value: "{{ rpms_to_install }}" }
+
+- name: Install RPM packages from rpms_to_install
+  ansible.builtin.yum:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ rpms_to_install.split(', ') }}"
+
+- name: Print the pip_modules variable
+  ansible.builtin.debug:
+    msg: "The pip_modules variable is {{ pip_modules }}"
+
+- name: Install Python packages using pip
+  community.general.pipx:
+    name: "{{ item }}"
+    install_deps: true
+    state: present
+  loop: "{{ pip_modules.split(', ') }}"
+
+
+- name: Disable the APP Red Hat repository
+  community.general.rhsm_repository:
+    name:
+     - ansible-automation-platform-2.4-for-rhel-9-x86_64-rpms
+    state: disabled
+

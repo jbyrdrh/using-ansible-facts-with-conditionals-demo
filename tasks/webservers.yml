@@ -1,0 +1,31 @@
+---
+- name: Check if index.html exists on the system
+  ansible.builtin.stat:
+    path: /var/www/html/index.html
+  register: file_check
+
+- name: Install httpd RPM package
+  ansible.builtin.yum:
+    name: httpd
+    state: present
+
+- name: Template index.html to /var/www/html/
+  ansible.builtin.template:
+    src: template/index.html.j2
+    dest: /var/www/html/index.html 
+    owner: root
+    group: root
+    setype: httpd_sys_content_t
+    mode: '0644'
+  when: not file_check.stat.exists
+
+- name: Apply new SELinux file context to filesystem
+  ansible.builtin.command: restorecon -irv /var/www/html
+  when: not file_check.stat.exists
+
+- name: Enable httpd service and make sure it starts upon reboot
+  ansible.builtin.service:
+    name: httpd
+    enabled: yes
+    state: started
+

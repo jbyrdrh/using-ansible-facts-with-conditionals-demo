@@ -1,0 +1,5 @@
+---
+- name: Task specific to databases
+  debug:
+    msg: "Executing tasks for databases group"
+

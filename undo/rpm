@@ -1,0 +1,1 @@
+ansible all -i inventory --limit rhel9-server2 -m shell -a 'yum remove -y ansible molecule git ansible-lint ansible-sign' --become

@@ -1,0 +1,4 @@
+ansible all -i inventory --limit rhel9-server2 -m shell -a '/usr/local/bin/pipx uninstall ansible-creator'  --become
+ansible all -i inventory --limit rhel9-server2 -m shell -a '/usr/local/bin/pipx uninstall pytest-ansible'  --become
+ansible all -i inventory --limit rhel9-server2 -m shell -a '/usr/local/bin/pipx uninstall tox-ansible'  --become
+
