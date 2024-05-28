@@ -10,7 +10,7 @@ Also note that the virtual machines are in 3 different networks.
 
 **Cloning the GitHub Demo Repository**
 
-*NOTE: The files provided in this repo are tailored specifically for my Red Hat test environment. It is important to note that you will need to modify hostnames, filenames, IP addresses, etc. as appropriate for your test environment.*
+*NOTE: The files provided in this repo are tailored specifically for my Red Hat test environment. It is important to note that you will need to modify hostnames, filenames, network references, etc. as appropriate for your test environment.*
 
 I recommend [adding your controlnode SSH key to GitHub](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account?tool=webui) in order to clone the repository.
 
