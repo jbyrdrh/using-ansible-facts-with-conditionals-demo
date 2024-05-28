@@ -60,7 +60,7 @@ rhel9-server2
 
 **Installing Collections from Ansible Galaxy**
 
-Three collections from Ansible Galaxy are required for this demo: [ansible.posix](https://galaxy.ansible.com/ui/repo/published/ansible/posix/), [community.general](https://galaxy.ansible.com/ui/repo/published/community/general/), [ansible.utils](https://galaxy.ansible.com/ui/repo/published/ansible/utils/).
+Three collections from Ansible Galaxy are required for this demo: [ansible.posix](https://galaxy.ansible.com/ui/repo/published/ansible/posix/), [community.general](https://galaxy.ansible.com/ui/repo/published/community/general/), and [ansible.utils](https://galaxy.ansible.com/ui/repo/published/ansible/utils/).
 
 Run the following commands to create the `collections` subdirectory  and install the appropriate collections inside of this newly created directory.
 ~~~
