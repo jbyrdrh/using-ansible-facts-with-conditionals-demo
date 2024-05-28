@@ -29,7 +29,7 @@ Resolving deltas: 100% (733/733), done.
 
 **The ansible.cfg and inventory files**
 
-I used the following `ansible.cfg` file which has the ansible user running the commands on the managed hosts, and I referenced the Ansible Galaxy community collection, `community.general`, which is used in the demo. Also, the `privilege_escalation` section includes become=True, so it does not need to be added to the playbooks.
+I used the following `ansible.cfg` file which includes the following notable configurations: remote_user=ansible (the ansible user must be created locally on the managed nodes in order to execute the commands), and the collection_path is defined because collections will be installed from Ansible Galaxy.
 
 ~~~
 [defaults]
@@ -60,7 +60,7 @@ rhel9-server2
 
 **Installing Collections from Ansible Galaxy**
 
-Two collections from Ansible Galaxy are required for this demo: [ansible.posix](https://galaxy.ansible.com/ui/repo/published/ansible/posix/) and [community.general](https://galaxy.ansible.com/ui/repo/published/community/general/).
+Three collections from Ansible Galaxy are required for this demo: [ansible.posix](https://galaxy.ansible.com/ui/repo/published/ansible/posix/), [community.general](https://galaxy.ansible.com/ui/repo/published/community/general/), [ansible.utils](https://galaxy.ansible.com/ui/repo/published/ansible/utils/).
 
 Run the following commands to create the `collections` subdirectory  and install the appropriate collections inside of this newly created directory.
 ~~~
@@ -75,6 +75,11 @@ community.general:9.0.1 was installed successfully
 Starting galaxy collection install process
 ...
 ansible.posix:1.5.4 was installed successfully
+
+[jbyrd@controlnode using-ansible-facts-with-conditionals-demo]$ ansible-galaxy collection install ansible.utils -p collections/ --force
+Starting galaxy collection install process
+...
+ansible.utils:4.1.0 was installed successfully
 ~~~
 
 *NOTE: If the collection is already installed, you can force a reinstall of the collection with with the `--force ` flag as shown.*
@@ -116,19 +121,19 @@ The 2nd playbook includes tasks that call the playbooks in the `tasks` directory
   tasks:
     - name: Include tasks for webservers group
       include_tasks: tasks/webservers.yml
-      when: "'webservers' in group_names" 
+      when: inventory_hostname in groups['webservers']
 
     - name: Include tasks for databases group
-      include_tasks: tasks/databases.yml
-      when: "'databases' in group_names"
+      include_tasks: tasks/database_servers.yml
+      when: inventory_hostname in groups['database_servers']
 
     - name: Include tasks for developer_servers group
       include_tasks: tasks/developer_servers.yml
-      when: "'developer_servers' in group_names"
+      when: inventory_hostname in groups['developer_servers']
 
     - name: Perform Security hardening on Secure VLAN (10.8.50.X)
       include_tasks: tasks/hardening.yml
-      when: ansible_facts.default_ipv4.network is defined and ansible_facts.default_ipv4.network.startswith("10.8.50") 
+      when: ansible_facts.default_ipv4.network | ansible.utils.ipaddr('10.8.50.0/24')
 ~~~
 
 **Bonus: The undo scripts**

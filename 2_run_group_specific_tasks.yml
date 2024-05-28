@@ -5,16 +5,16 @@
   tasks:
     - name: Include tasks for webservers group
       include_tasks: tasks/webservers.yml
-      when: "'webservers' in group_names" 
+      when: inventory_hostname in groups['webservers']
 
     - name: Include tasks for databases group
       include_tasks: tasks/database_servers.yml
-      when: "'database_servers' in group_names"
+      when: inventory_hostname in groups['database_servers']
 
     - name: Include tasks for developer_servers group
       include_tasks: tasks/developer_servers.yml
-      when: "'developer_servers' in group_names"
+      when: inventory_hostname in groups['developer_servers']
 
     - name: Perform Security hardening on Secure VLAN (10.8.50.X)
       include_tasks: tasks/hardening.yml
-      when: ansible_facts.default_ipv4.network is defined and ansible_facts.default_ipv4.network.startswith("10.8.50") 
+      when: ansible_facts.default_ipv4.network | ansible.utils.ipaddr('10.8.50.0/24')
