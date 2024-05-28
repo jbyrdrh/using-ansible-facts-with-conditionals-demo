@@ -38,3 +38,15 @@ rhel9-server1
 [developer_servers]
 rhel9-server2
 ~~~
+
+**Needed Ansible Galaxy Collections**
+
+You will need to install a couple of ansible collections from Ansible Galaxy, posix and community.general.
+
+First, create your root projects directory and then create the collections directory under the project directory.
+
+[jbyrd@controlnode using-ansible-facts-with-conditionals-demo]$ mkdir collections
+[jbyrd@controlnode using-ansible-facts-with-conditionals-demo]$ ansible-galaxy collection install community.general -p collections/
+NOTE: if the collection is already installed, you can force a reinstall of the collection with with the --force flag.
+
+NOTE: The files provided in github are tailored specifically for my Red Hat test network. You will need to modify hostnames, filenames, IP addresses, etc. as needed, and you can optionally sync your control node with github to have change control. You can add an SSH key to GitHub in order to clone the demo repository.
