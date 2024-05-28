@@ -41,7 +41,7 @@ rhel9-server2
 
 **Needed Ansible Galaxy Collections**
 
-You will need to install a couple of ansible collections from Ansible Galaxy, posix and community.general.
+You will need to install a couple of ansible collections from Ansible Galaxy, [ansible.posix](https://galaxy.ansible.com/ui/repo/published/ansible/posix/) and [community.general](https://galaxy.ansible.com/ui/repo/published/community/general/).
 
 First, create the `collections` directory under the root project directory.
 
