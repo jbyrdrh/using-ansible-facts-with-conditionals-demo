@@ -3,7 +3,8 @@
   ansible.builtin.debug:
     msg: "Executing tasks for database_servers group" 
 
-- name: Create a new database with name "acme"
-  community.postgresql.postgresql_db:
-    name: acme
-    comment: My test DB
+- name: Configure postgresql using role
+  import_role:
+    name: linux-system-roles.postgresql
+  become: yes
+  become_user: root
