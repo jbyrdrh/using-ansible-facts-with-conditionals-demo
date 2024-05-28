@@ -52,4 +52,4 @@ First, create your root projects directory and then create the collections direc
 
 *NOTE: if the collection is already installed, you can force a reinstall of the collection with with the `--force` flag.*
 
-*NOTE: The files provided in github are tailored specifically for my Red Hat test network. You will need to modify hostnames, filenames, IP addresses, etc. as needed, and you can optionally sync your control node with github to have change control. You can add an SSH key to GitHub in order to clone the demo repository.*
+*NOTE: The files provided in GitHub are tailored specifically for my Red Hat test network. You will need to modify hostnames, filenames, IP addresses, etc. as needed, and you can optionally sync your control node with github to have change control. You can add an SSH key to GitHub in order to clone the demo repository.*
