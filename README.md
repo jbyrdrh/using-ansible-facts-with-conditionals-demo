@@ -43,7 +43,7 @@ rhel9-server2
 
 You will need to install a couple of ansible collections from Ansible Galaxy, posix and community.general.
 
-First, create your root projects directory and then create the collections directory under the project directory.
+First, create the `collections` directory under the root project directory.
 
 ~~~
 [jbyrd@controlnode using-ansible-facts-with-conditionals-demo]$ mkdir collections
