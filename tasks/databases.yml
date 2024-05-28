@@ -1,5 +1,10 @@
----
-- name: Task specific to databases
-  debug:
-    msg: "Executing tasks for databases group"
+- name: Config postgresql version 13
+  vars:
+    postgresql_version: "13"
 
+  tasks:
+  - name: Configure postgresql using role
+    import_role:
+      name: linux-system-roles.postgresql
+    become: yes
+    become_user: root
