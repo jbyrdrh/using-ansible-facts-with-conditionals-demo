@@ -2,7 +2,7 @@
 rhel8-server1
 rhel8-server2
 
-[databases]
+[database_servers]
 rhel9-server1
 
 [developer_servers]

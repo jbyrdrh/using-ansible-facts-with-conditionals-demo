@@ -9,7 +9,7 @@
 
     - name: Include tasks for databases group
       include_tasks: tasks/databases.yml
-      when: "'databases' in group_names"
+      when: "'database_servers' in group_names"
 
     - name: Include tasks for developer_servers group
       include_tasks: tasks/developer_servers.yml
