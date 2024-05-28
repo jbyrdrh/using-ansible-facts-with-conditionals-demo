@@ -1,4 +1,4 @@
-Using Ansible Facts with Conditionals Demo
+**Using Ansible Facts with Conditionals Demo**
 
 In this post: Learn how to push custom ansible_facts through a playbook to different managed hosts depending on system purpose: development, database, or webserver.
 
