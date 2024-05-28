@@ -1,1 +1,2 @@
 ansible all -i inventory --limit rhel9-server2 -m shell -a 'yum remove -y ansible molecule git ansible-lint ansible-sign' --become
+ansible all -i inventory --limit rhel9-server1 -m shell -a 'yum remove -y postgresql-server postgresql' --become
