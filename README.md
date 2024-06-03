@@ -121,6 +121,16 @@ The first playbook verifies the `/etc/ansible/facts.d/` directory exists on each
         mode: '0644'
 ~~~
 
+For example, the following facts file is generated on the development server, `rhel9-server2`, which is the file copied from the `host_vars` directory on `controlnode`:
+
+~~~
+[root@rhel9-server2 ~]# cat /etc/ansible/facts.d/custom_facts.fact 
+[my_packages]
+my_rpms = ansible, git, ansible-lint, molecule, ansible-sign
+my_pips = ansible-creator, pytest-ansible, tox-ansible
+~~~
+
+
 **Playbook #2:   2_run_group_specific_tasks.yml**
 
 The 2nd playbook includes tasks that call the playbooks in the `tasks` directory, `databases.yml`, `developer_servers.yml`, `hardening.yml`, and `webservers.yml`, according to how each server is grouped in the `inventory` file.
